@@ -1,0 +1,54 @@
+.results-panel {
+    margin-top: 20px;
+    flex-grow: 1;
+}
+.results-list {
+    list-style: none;
+    padding: 0;
+}
+.result-item {
+    display: flex;
+    background-color: #fff;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+.rank {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #d9232d;
+    margin-right: 15px;
+    align-self: center;
+}
+.details {
+    flex-grow: 1;
+}
+.road-name {
+    font-weight: bold;
+    font-size: 1.1em;
+}
+.reason {
+    color: #555;
+    font-size: 0.9em;
+    margin: 5px 0;
+}
+.traffic-index {
+    font-size: 0.9em;
+    font-weight: bold;
+    color: #333;
+    position: relative;
+    padding-left: 15px;
+}
+.traffic-index::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: hsl(calc((1 - var(--traffic-value, 0)) * 120), 100%, 50%);
+}

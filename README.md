@@ -79,9 +79,9 @@ The project is organized into two main folders:
 ```
 road-traffic-analysis/
 ├── backend/            # .NET Web API project source code
-│      └── Dockerfile  # Docker instructions for the backend
+│      └── Dockerfile   # Docker instructions for the backend
 ├── frontend/           # React.js project source code
-│      └── Dockerfile  # Docker instructions for the frontend
+│      └── Dockerfile   # Docker instructions for the frontend
 ├── .gitignore          # Specifies files to ignore for Git
 ├── docker-compose.yml  # Defines and orchestrates the services
 └── README.md           # This file```

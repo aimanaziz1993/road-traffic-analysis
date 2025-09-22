@@ -1,35 +1,33 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { ResultsPanel } from './features/analysis/ResultsPanel';
+import { MapView } from './features/map/MapView';
+import { AnalysisForm } from './features/analysis/AnalysisForm';
+import { useRunAnalysisMutation } from './features/api/analysisApi';
+import type { AnalysisRequest } from './types';
+import './styles/App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [runAnalysis, { data: results, isLoading, error }] = useRunAnalysisMutation();
+
+  const handleAnalysis = (filters: AnalysisRequest) => {
+    runAnalysis(filters);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="App-container">
+      <header className="App-header">
+        <h1>🍔 Best Burger Teramat Viral - Location Analysis</h1>
+      </header>
+      <main className="App-main">
+        <div className="sidebar">
+          <AnalysisForm onAnalyze={handleAnalysis} isLoading={isLoading} />
+          <ResultsPanel results={results} isLoading={isLoading} error={error} />
+        </div>
+        <div className="map-container">
+          <MapView results={results} />
+        </div>
+      </main>
+    </div>
+  );
 }
 
-export default App
+export default App;
