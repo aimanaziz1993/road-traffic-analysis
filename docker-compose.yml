@@ -1,0 +1,16 @@
+services:
+  dotnet-backend:
+    build: ./backend
+    ports:
+      - "5050:5050"
+    container_name: dotnet-api
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - dotnet-backend
+    container_name: road-traffic-analysis
+    environment:
+      - CHOKIDAR_USEPOLLING=true
