@@ -28,9 +28,19 @@ export const ResultsPanel: FC<ResultsPanelProps> = ({ results, isLoading, error 
             <div className="details">
               <div className="road-name">{road.roadName} - {road.city}</div>
               <div className="reason">{road.reason}</div>
-              <div className="traffic-index" style={{'--traffic-value': road.trafficIndex}  as React.CSSProperties}>
-                Traffic Index: {road.trafficIndex}
+              <div className="score-container">
+                  <div className="score-label">Potential Score</div>
+                  <div className="score-value">{road.locationPotentialScore.toFixed(2)}</div>
+                  <div className="score-bar-background">
+                      <div 
+                          className="score-bar-foreground" 
+                          style={{ width: `${road.locationPotentialScore * 100}%` }}
+                      ></div>
+                  </div>
               </div>
+              {/* <div className="traffic-index" style={{'--traffic-value': road.trafficIndex}  as React.CSSProperties}>
+                Traffic Index: {road.trafficIndex}
+              </div> */}
             </div>
           </li>
         ))}

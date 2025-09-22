@@ -2,14 +2,14 @@ using System.Text.Json.Serialization;
 // Note: This namespace is different from the ApiContract
 namespace backend.Models.DataSource;
 
-public class FeatureCollection
-{
-    [JsonPropertyName("type")]
-    public string Type { get; set; }
+// public class FeatureCollection
+// {
+//     [JsonPropertyName("type")]
+//     public string Type { get; set; }
 
-    [JsonPropertyName("features")]
-    public List<Feature> Features { get; set; }
-}
+//     [JsonPropertyName("features")]
+//     public List<Feature> Features { get; set; }
+// }
 public class Feature
 {
     [JsonPropertyName("type")]
