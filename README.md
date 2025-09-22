@@ -90,7 +90,8 @@ cd <repository-folder>
 ### 2. Build and Run the Application
 From the project's root directory (where `docker-compose.yml` is located), run the following command:
 ```bash
-docker compose up --build```
+docker compose up --build
+```
 -   The `--build` flag is essential for the first run or after any code changes.
 -   The initial build may take a few minutes to download the necessary Docker images and install all dependencies.
 

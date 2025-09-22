@@ -9,9 +9,10 @@ interface ResultsPanelProps {
   results?: RoadCandidate[];
   isLoading: boolean;
   error?: FetchBaseQueryError | SerializedError;
+  onRoadSelect: (road: RoadCandidate) => void;
 }
 
-export const ResultsPanel: FC<ResultsPanelProps> = ({ results, isLoading, error }) => {
+export const ResultsPanel: FC<ResultsPanelProps> = ({ results, isLoading, error, onRoadSelect }) => {
   if (isLoading) return <div className="results-panel">Loading...</div>;
   if (error) return <div className="results-panel error">{getErrorMessage(error)}</div>;
   if (!results) return <div className="results-panel">Run an analysis to see results.</div>;
@@ -23,7 +24,7 @@ export const ResultsPanel: FC<ResultsPanelProps> = ({ results, isLoading, error 
       <h3>Top 10 Candidate Roads</h3>
       <ul className="results-list">
         {results.map((road, index) => (
-          <li key={road.id} className="result-item">
+          <li key={road.id} className="result-item" onClick={() => onRoadSelect(road)}>
             <div className="rank">{index + 1}</div>
             <div className="details">
               <div className="road-name">{road.roadName} - {road.city}</div>

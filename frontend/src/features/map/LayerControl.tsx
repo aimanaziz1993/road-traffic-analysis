@@ -10,7 +10,7 @@ interface LayerControlProps {
 
 export const LayerControl: FC<LayerControlProps> = ({ activeLayer, setActiveLayer }) => {
   return (
-    <div className="leaflet-bottom leaflet-right">
+    <div className="leaflet-top leaflet-right">
       <div className="leaflet-control leaflet-bar layer-control-container">
         <button
           className={activeLayer === 'lines' ? 'active' : ''}

@@ -4,6 +4,7 @@ import 'leaflet/dist/leaflet.css';
 import type { RoadCandidate } from '../../types';
 import { MapAnimator } from './MapAnimator';
 import { LayerControl, type MapLayer } from './LayerControl';
+import { ZoomToFeature } from './ZoomToFeature';
 import { HeatmapLayer } from './HeatmapLayer';
 import '../../styles/MapView.css';
 
@@ -20,9 +21,10 @@ const getColor = (score: number) => {
 
 interface MapViewProps {
   results?: RoadCandidate[];
+  selectedRoad: RoadCandidate | null;
 }
 
-export const MapView: FC<MapViewProps> = ({ results }) => {
+export const MapView: FC<MapViewProps> = ({ results, selectedRoad }) => {
   const [activeLayer, setActiveLayer] = useState<MapLayer>('lines');
   const selangorCenter: [number, number] = [3.0738, 101.5183];
 
@@ -63,6 +65,7 @@ export const MapView: FC<MapViewProps> = ({ results }) => {
       )}
 
       <MapAnimator results={results} />
+      <ZoomToFeature feature={selectedRoad} />
       <LayerControl activeLayer={activeLayer} setActiveLayer={setActiveLayer} />
     </MapContainer>
   );

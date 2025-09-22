@@ -49,17 +49,56 @@
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  display: flex;
 }
-/* Custom scrollbar for the panel */
-.sidebar::-webkit-scrollbar {
-  width: 6px;
+.sidebar.closed {
+  transform: translateX(calc(-100% + 20px)); /* Hide panel, but leave a bit of the button visible */
 }
-.sidebar::-webkit-scrollbar-thumb {
-  background: var(--accent-primary);
-  border-radius: 3px;
+/* Make the button rotate when panel is closed */
+.sidebar.closed .panel-toggle-button {
+  transform: rotate(180deg);
 }
-.sidebar::-webkit-scrollbar-track {
-  background: transparent;
+/* Container for the actual content, to allow for independent scrolling */
+.sidebar-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+/* Hide the scrollbar track, but keep functionality */
+.sidebar-content::-webkit-scrollbar { width: 6px; }
+.sidebar-content::-webkit-scrollbar-thumb { background: var(--accent-primary); border-radius: 3px; }
+.sidebar-content::-webkit-scrollbar-track { background: transparent; }
+
+/* The toggle button */
+.panel-toggle-button {
+  position: absolute;
+  top: 50%;
+  right: -20px; /* Position it outside the main panel area */
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background: var(--panel-background);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--panel-border);
+  border-left: none; /* Join it visually to the panel */
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+  color: var(--text-primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 5px;
+  transition: transform 0.4s ease;
+}
+
+.panel-toggle-button:hover {
+  background: rgba(0, 198, 255, 0.2);
 }
 
 .map-container {
