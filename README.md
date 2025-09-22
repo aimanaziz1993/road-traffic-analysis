@@ -6,7 +6,8 @@ The application features a robust .NET 8 backend acting as an analysis engine an
 
 ---
 
-### [Insert a screenshot of the new, dark-themed dashboard UI here]
+### [Screenshot]
+<img width="1436" height="790" alt="Screenshot 2025-09-23 at 4 10 35 AM" src="https://github.com/user-attachments/assets/5ff8fc06-3e77-45ba-9e1f-026f81fcd691" />
 
 ---
 
@@ -71,7 +72,6 @@ The `LocationPotentialScore` is calculated using the following weighted model:
 
 **Containerization:**
 - Docker & Docker Compose
-- Nginx (for serving the frontend)
 
 ---
 
@@ -90,7 +90,7 @@ cd <repository-folder>
 ### 2. Build and Run the Application
 From the project's root directory (where `docker-compose.yml` is located), run the following command:
 ```bash
-docker-compose up --build```
+docker compose up --build```
 -   The `--build` flag is essential for the first run or after any code changes.
 -   The initial build may take a few minutes to download the necessary Docker images and install all dependencies.
 
@@ -106,5 +106,5 @@ Once the containers are running, you can access the different parts of the appli
 ### 4. Stopping the Application
 To stop all running containers, press `Ctrl + C` in the terminal where Docker Compose is running. To remove the containers and network, run:
 ```bash
-docker-compose down
+docker compose down
 ```
