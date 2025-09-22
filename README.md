@@ -1,30 +1,30 @@
-# Full-Stack .NET 8 and React Application with Docker
+# Full-Stack Location Analysis Tool for "Best Burger Teramat Viral"
 
-This project serves as a ready-to-use template for a full-stack web application using a .NET 8 REST API backend and a React.js frontend. The entire application is containerized using Docker and orchestrated with Docker Compose, allowing for a seamless, one-command setup in any local development environment.
+This project is a full-stack web application designed to help "Best Burger Teramat Viral" identify promising locations for a new outlet in Selangor. It analyzes road traffic data to rank the top 10 busiest roads based on various filters.
+
+The application features a .NET 8 REST API backend and a React.js frontend, containerized with Docker for a seamless, one-command setup.
 
 ## Features
 
--   **Backend:** .NET 8 Web API
--   **Frontend:** React.js + Vite + Typescript
--   **Containerization:** Docker & Docker Compose
--   **Development Ready:** Pre-configured for cross-container communication.
--   **API Documentation:** Swagger UI is enabled for easy API testing and exploration.
+-   **Backend:** .NET 8 Web API that loads and processes road data from a CSV file.
+-   **Frontend:** React.js with Redux Toolkit and RTK Query for state management.
+-   **Dynamic Filtering:** Filter roads by city, road type, and minimum number of lanes.
+-   **Data Visualization:**
+    -   A ranked list of the top 10 roads.
+    -   An interactive map view using `react-leaflet` that visualizes road segments colored by traffic density.
+-   **Containerization:** Fully containerized with Docker & Docker Compose.
+-   **API Documentation:** Swagger UI enabled at `/swagger` for API exploration.
 
 ---
 
 ## Prerequisites
 
-Before you begin, ensure you have the following installed on your system (this guide is tailored for macOS but is applicable to Windows/Linux):
-
 -   [Docker Desktop](https://www.docker.com/products/docker-desktop/)
--   [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
--   [Node.js and npm](https://nodejs.org/en/)
+-   An internet connection to download base images and dependencies.
 
 ---
 
 ## Getting Started
-
-Follow these steps to get the application running locally.
 
 ### 1. Clone the Repository
 
@@ -43,31 +43,29 @@ Navigate to the root directory of the project (where the `docker-compose.yml` fi
 docker compose up --build
 ```
 
--   `--build`: This flag tells Docker Compose to build the images from the Dockerfiles before starting the containers. You should use this the first time you run the application or after making any changes to the code or Dockerfiles.
--   For subsequent runs, you can simply use `docker compose up`.
+-   `--build`: This flag builds the Docker images from scratch. Use it the first time you run the app or after any code changes.
+-   For subsequent runs, you can simply use `docker-compose up`.
 
-The first build may take a few minutes as it needs to download the base Docker images and install all dependencies.
+The first build may take a few minutes to complete.
 
-### 3. Access the Application
+### 3. Using the Application
 
-Once the containers are running, you can access the different parts of the application:
+Once the containers are running, you can access the application:
 
--   **Frontend (React App):**
+-   **Main Dashboard (Frontend):**
     -   URL: [http://localhost:3000](http://localhost:3000)
-    -   You should see a page displaying a list of items fetched from the backend API.
+    -   Use the filters in the sidebar and click "Run Analysis" to see the results.
 
--   **Backend (Swagger UI):**
+-   **Backend API (Swagger UI):**
     -   URL: [http://localhost:5050/swagger](http://localhost:5050/swagger)
-    -   Use the Swagger interface to explore and test the API endpoints directly.
+    -   Use the Swagger interface to test the `/api/analysis` endpoint directly.
 
 ### 4. Stopping the Application
 
-To stop all running containers, press `Ctrl + C` in the terminal where Docker Compose is running.
-
-To remove the containers completely, you can run:
+To stop the running containers, press `Ctrl + C` in the terminal. To remove the containers and network, run:
 
 ```bash
-docker compose down
+docker-compose down
 ```
 
 ---
