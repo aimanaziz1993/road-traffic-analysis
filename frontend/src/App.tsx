@@ -4,9 +4,14 @@ import { AnalysisForm } from './features/analysis/AnalysisForm';
 import { useRunAnalysisMutation } from './features/api/analysisApi';
 import type { AnalysisRequest } from './types';
 import './styles/App.css';
+import { useEffect } from 'react';
 
 function App() {
   const [runAnalysis, { data: results, isLoading, error }] = useRunAnalysisMutation();
+
+  useEffect(() => {
+    runAnalysis({});
+  }, [runAnalysis])
 
   const handleAnalysis = (filters: AnalysisRequest) => {
     runAnalysis(filters);

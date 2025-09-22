@@ -1,0 +1,42 @@
+.layer-control-container {
+  display: flex;
+  background-color: var(--panel-background) !important;
+  backdrop-filter: blur(10px);
+  border-radius: 8px !important;
+  border: 1px solid var(--panel-border) !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.layer-control-container button {
+  background-color: transparent;
+  border: none;
+  color: var(--text-secondary);
+  padding: 8px 16px;
+  cursor: pointer;
+  font-family: var(--font-family);
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+}
+
+.layer-control-container button:first-child {
+  border-top-left-radius: 7px;
+  border-bottom-left-radius: 7px;
+}
+
+.layer-control-container button:last-child {
+  border-top-right-radius: 7px;
+  border-bottom-right-radius: 7px;
+}
+
+
+.layer-control-container button.active {
+  background: linear-gradient(45deg, var(--accent-secondary), var(--accent-primary));
+  color: white;
+  font-weight: 700;
+}
+
+.layer-control-container button:not(.active):hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+}

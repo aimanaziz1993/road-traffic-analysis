@@ -1,11 +1,20 @@
-import { type FC } from 'react';
-import { MapContainer, TileLayer, Polyline, Tooltip } from 'react-leaflet';
+import{ type FC, useState } from 'react';
+import { MapContainer, TileLayer, Polyline, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import type { RoadCandidate } from '../../types';
 import { MapAnimator } from './MapAnimator';
+import { LayerControl, type MapLayer } from './LayerControl';
+import { HeatmapLayer } from './HeatmapLayer';
+import '../../styles/MapView.css';
 
-const getColor = (trafficIndex: number) => {
-    const hue = (1 - trafficIndex) * 120; // 0 (red) to 120 (green)
+// const getColor = (trafficIndex: number) => {
+//     const hue = (1 - trafficIndex) * 120;
+//     return `hsl(${hue}, 100%, 50%)`;
+// };
+
+const getColor = (score: number) => {
+    // Score is 0-1, so hue is 0 (red) to 120 (green)
+    const hue = score * 120;
     return `hsl(${hue}, 100%, 50%)`;
 };
 
@@ -14,32 +23,47 @@ interface MapViewProps {
 }
 
 export const MapView: FC<MapViewProps> = ({ results }) => {
+  const [activeLayer, setActiveLayer] = useState<MapLayer>('lines');
   const selangorCenter: [number, number] = [3.0738, 101.5183];
 
+  const heatmapPoints: [number, number, number][] = results ? results.flatMap(road => road.heatmapPoints) ?? [] : [];
+
   return (
-    <MapContainer center={selangorCenter} zoom={10} style={{ height: '100%', width: '100%' }}>
+    <MapContainer center={selangorCenter} zoom={10} style={{ height: '100%', width: '100%' }} zoomControl={false}>
       <TileLayer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        // Using a dark theme tile layer
+        url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
       />
-      {results && results.map(road => {
-        const color = getColor(road.trafficIndex);
-        const positions = road.geometry.coordinates.map(coord => [coord[1], coord[0]] as [number, number]);
+
+      {/* Conditional Rendering of Layers */}
+      {activeLayer === 'lines' && results?.map(road => {
+        const positions = road.geometry.coordinates.map(
+          coord => [coord[1], coord[0]] as [number, number]
+        );
         return (
           <Polyline
             key={road.id}
             positions={positions}
-            pathOptions={{ color: color, weight: 5 }}
+            pathOptions={{ color: getColor(road.locationPotentialScore), weight: 5, opacity: 0.8 }}
           >
-            <Tooltip>
-              <div><strong>{road.roadName}</strong></div>
-              <div>Traffic Index: {road.trafficIndex}</div>
-              <div>{road.city}</div>
-            </Tooltip>
+            <Popup>
+              <div className="custom-popup">
+                <h4>{road.roadName}</h4>
+                <p>{road.city}, {road.roadType}</p>
+                <span>Traffic Index: <strong>{road.trafficIndex}</strong></span>
+              </div>
+            </Popup>
           </Polyline>
         );
       })}
+
+      {activeLayer === 'heatmap' && (
+        <HeatmapLayer points={heatmapPoints} />
+      )}
+
       <MapAnimator results={results} />
+      <LayerControl activeLayer={activeLayer} setActiveLayer={setActiveLayer} />
     </MapContainer>
   );
 };

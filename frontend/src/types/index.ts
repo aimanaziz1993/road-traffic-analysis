@@ -11,7 +11,9 @@ export interface RoadCandidate {
   lanes: number;
   trafficIndex: number;
   reason: string;
+  locationPotentialScore: number;
   geometry: GeometryData;
+  heatmapPoints: [number, number, number][];
 }
 
 export interface AnalysisRequest {

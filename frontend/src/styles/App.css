@@ -1,49 +1,68 @@
 .App-container {
-    text-align: center;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
 }
 
+/* Header is now an overlay on the map */
 .App-header {
-    background-color: #d9232d;
-    padding: 20px;
-    color: white;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1001; /* Above panels and map */
+  padding: 20px 40px;
+  background: linear-gradient(180deg, rgba(26, 29, 36, 0.7) 0%, rgba(26, 29, 36, 0) 100%);
+  pointer-events: none; /* Allows clicking through the gradient */
+}
+
+.App-header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
 
 .App-main {
-    display: flex;
-    flex-direction: row;
-    height: calc(100vh - 97px);
+  display: flex;
+  height: 100vh;
 }
 
+/* Floating sidebar panel */
 .sidebar {
-    width: 450px;
-    background-color: #fff;
-    padding: 20px;
-    overflow-y: auto;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-    display: flex;
-    flex-direction: column;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+  width: 420px;
+  height: calc(100vh - 40px);
+  background: var(--panel-background);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 16px;
+  border: 1px solid var(--panel-border);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+/* Custom scrollbar for the panel */
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+.sidebar::-webkit-scrollbar-thumb {
+  background: var(--accent-primary);
+  border-radius: 3px;
+}
+.sidebar::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 .map-container {
-    flex: 1;
-    height: 100%;
-}
-
-.view-toggle {
-    margin: 20px 0;
-}
-
-.view-toggle button {
-    padding: 10px 15px;
-    margin-right: 10px;
-    cursor: pointer;
-    border: 1px solid #ddd;
-    background-color: #f9f9f9;
-}
-
-.view-toggle button:disabled {
-    background-color: #d9232d;
-    color: white;
-    border-color: #d9232d;
+  flex: 1;
+  height: 100%;
 }

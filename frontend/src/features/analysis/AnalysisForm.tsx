@@ -39,7 +39,7 @@ export const AnalysisForm: FC<AnalysisFormProps> = ({ onAnalyze, isLoading }) =>
       </div>
       <div className="form-group">
         <label>Minimum Lanes</label>
-        <input type="number" value={minLanes} onChange={(e) => setMinLanes(e.target.value)} placeholder="min lanes must be 1 - 20" />
+        <input type="number" value={minLanes} onChange={(e) => setMinLanes(e.target.value)} placeholder="min lanes must be 1 - 16" />
       </div>
       <button type="submit" disabled={isLoading}>
         {isLoading ? 'Analyzing...' : 'Run Analysis'}
