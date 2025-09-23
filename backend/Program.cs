@@ -8,17 +8,15 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: MyAllowSpecificOrigins,
-                      policy =>
-                      {
-                          policy.WithOrigins("http://localhost:3000")
-                                .AllowAnyHeader()
-                                .AllowAnyMethod();
-                      });
+    options.AddPolicy(name: MyAllowSpecificOrigins, policy =>
+    {
+        policy.WithOrigins("http://localhost:3000")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
 });
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+// Add services to container
 builder.Services.AddControllers();
 builder.Services.AddSingleton<RoadDataService>();
 builder.Services.AddSingleton<ScoringService>();
@@ -29,7 +27,6 @@ var app = builder.Build();
 
 app.UseMiddleware<GlobalExceptionHandler>();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -43,7 +40,7 @@ app.UseSwaggerUI();
 // Comment out to remove warn message
 // app.UseHttpsRedirection();
 
-app.UseCors(MyAllowSpecificOrigins); // Enable the CORS policy
+app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthorization();
 

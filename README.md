@@ -109,3 +109,47 @@ To stop all running containers, press `Ctrl + C` in the terminal where Docker Co
 ```bash
 docker compose down
 ```
+
+---
+
+## 🔮 What's Next: Future Enhancements
+
+This application provides a powerful foundation for location intelligence. The following features are planned to further enhance its analytical capabilities and provide even deeper, more actionable insights.
+
+### Deeper & More Granular Analysis
+
+1.  **Competitor Layer:**
+    -   **Goal:** Visualize the locations of competing businesses on the map to analyze market saturation.
+    -   **Implementation:** Add a toggleable map layer that plots known competitor locations, allowing for strategic analysis of proximity and potential market gaps.
+
+2.  **Scoring Model Tuner:**
+    -   **Goal:** Empower users to adjust the analysis to fit different business strategies (e.g., prioritizing visibility over raw traffic).
+    -   **Implementation:** Introduce an "Advanced Scoring" panel with sliders that allow users to dynamically adjust the weights of each factor (`Traffic`, `Speed`, `Road Type`, etc.) and see the results update in real-time.
+
+3.  **Time-of-Day Analysis:**
+    -   **Goal:** Analyze how location potential changes throughout the day to align with peak business hours.
+    -   **Implementation:** Add a filter to simulate traffic patterns during "Morning Rush," "Lunchtime," and "Evening Rush," using different traffic index data for each period.
+
+### Richer User Interaction & Experience
+
+4.  **Interactive Chart Visualization:**
+    -   **Goal:** Provide an alternative, more comparative view of the top-ranked locations.
+    -   **Implementation:** Add a toggle to switch the results panel to a bar chart view, where each bar represents a location's `LocationPotentialScore`. Bars will be clickable to zoom to the corresponding road on the map.
+
+5.  **"Draw an Area" Custom Analysis:**
+    -   **Goal:** Move beyond city-based filtering to allow for hyper-focused, custom-defined analysis zones.
+    -   **Implementation:** Integrate a drawing tool that allows users to draw a polygon directly on the map and run the entire analysis pipeline exclusively on the roads within that custom boundary.
+
+### Production Readiness & Enterprise Features
+
+6.  **API Caching & Performance Optimization:**
+    -   **Goal:** Ensure the application is fast and scalable, even with larger datasets or more users.
+    -   **Implementation:** Introduce a caching layer on the backend to store the results of recent analyses, providing instantaneous responses for repeated queries.
+
+7.  **Unit & Integration Testing:**
+    -   **Goal:** Guarantee application stability and reliability as new features are added.
+    -   **Implementation:** Develop a comprehensive test suite for both the backend (using xUnit) and frontend (using Vitest) to automate quality assurance and prevent regressions.
+
+8.  **Save & Compare Scenarios:**
+    -   **Goal:** Allow users to save different analysis configurations and compare their results side-by-side.
+    -   **Implementation:** Add functionality to save a complete analysis (filters, weights, and results) as a named "scenario." A dedicated comparison view would then allow users to load and contrast multiple scenarios to make the best possible decision.

@@ -54,6 +54,7 @@ export const MapView: FC<MapViewProps> = ({ results, selectedRoad }) => {
                 <h4>{road.roadName}</h4>
                 <p>{road.city}, {road.roadType}</p>
                 <span>Traffic Index: <strong>{road.trafficIndex}</strong></span>
+                <span>Potential Score: <strong>{road.locationPotentialScore.toFixed(2)}</strong></span>
               </div>
             </Popup>
           </Polyline>

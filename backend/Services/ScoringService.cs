@@ -4,7 +4,7 @@ namespace backend.Services;
 
 public class ScoringService
 {
-    // Define weights for our model
+    // Define weights for the model
     private const double TrafficWeight = 0.40;
     private const double SpeedWeight = 0.30;
     private const double LanesWeight = 0.15;
@@ -59,7 +59,8 @@ public class ScoringService
     // Normalizes lanes to a 0-1 score, rewarding more lanes.
     private static double CalculateLanesScore(int lanes)
     {
-        return Math.Min((double)lanes / 6.0, 1.0); // Cap score at 6 lanes
+        // Cap score at 6 lanes
+        return Math.Min((double)lanes / 6.0, 1.0);
     }
 
 }

@@ -22,7 +22,6 @@ public class GlobalExceptionHandler
         }
         catch (Exception ex)
         {
-            // Log the exception for debugging purposes
             _logger.LogError(ex, "An unhandled exception has occurred: {Message}", ex.Message);
             
             // Create a standardized error response

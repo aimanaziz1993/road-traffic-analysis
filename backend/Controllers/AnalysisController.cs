@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using backend.Models;
-using backend.Models.ApiContract; // Using our clean contract models
+using backend.Models.ApiContract;
 using backend.Services;
 
 namespace backend.Controllers;
@@ -27,7 +27,7 @@ public class AnalysisController : ControllerBase
     [ProducesResponseType(typeof(ValidationProblemDetails), 400)]
     public IActionResult RunAnalysis([FromBody] AnalysisRequest request)
     {
-        // Manual validation for the road type
+        // Validation
         if (!string.IsNullOrEmpty(request.RoadType) && !ValidRoadTypes.Contains(request.RoadType))
         {
             ModelState.AddModelError(nameof(request.RoadType), $"Invalid road type. Must be one of: expressway, primary, secondary.");

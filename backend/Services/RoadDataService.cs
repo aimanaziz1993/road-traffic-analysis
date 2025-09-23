@@ -1,6 +1,5 @@
 using System.Text.Json;
 using NetTopologySuite.IO;
-using NetTopologySuite.Geometries;
 using backend.Models.DataSource;
 using NetTopologySuite.Features;
 
@@ -27,12 +26,9 @@ public class RoadDataService
             var reader = new GeoJsonReader();
             var featureCollection = reader.Read<FeatureCollection>(jsonString);
 
-            // 3. Transform into our internal, easy-to-use RoadFeature record
             _roadFeatures = featureCollection.Select(f =>
             {
                 var attributes = f.Attributes;
-                // The geometry is now a real NetTopologySuite.Geometry object.
-                // We just need to map the attributes to our RoadProperties class.
                 var properties = new RoadProperties
                 {
                     Id = attributes.GetOptionalValue("id")?.ToString() ?? string.Empty,
