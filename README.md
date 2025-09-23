@@ -11,8 +11,8 @@ The application features a robust .NET 8 backend acting as an analysis engine an
 <p float="left" align="middle">
 <img width="1280" height="640" alt="Screenshot 2025-09-23 at 1 48 00 PM" src="https://github.com/user-attachments/assets/4fd84404-c8a4-4eb5-b4cb-0008375dff67" />
 <img width="1280" height="640" alt="Screenshot 2025-09-23 at 1 46 29 PM" src="https://github.com/user-attachments/assets/e7871d50-b9bd-43dc-8e64-9006dfa2aca4" />
+<img width="1436" height="790" alt="Screenshot 2025-09-23 at 2 31 04 PM" src="https://github.com/user-attachments/assets/5ef6eea3-b217-4541-a23e-9a61fcc7c552" />
 </p>
-
 
 ---
 
