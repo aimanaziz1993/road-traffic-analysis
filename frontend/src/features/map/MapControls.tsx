@@ -1,13 +1,20 @@
-import { type FC } from 'react';
+import { type FC, type ChangeEvent } from 'react';
 import type { MapLayer } from './MapView';
+import { basemaps } from './map.config';
 import '../../styles/MapControls.css';
 
 interface MapControlsProps {
   activeLayer: MapLayer;
   setActiveLayer: (layer: MapLayer) => void;
+  activeBasemapId: string;
+  setActiveBasemapId: (id: string) => void;
 }
 
-export const MapControls: FC<MapControlsProps> = ({ activeLayer, setActiveLayer }) => {
+export const MapControls: FC<MapControlsProps> = ({ activeLayer, setActiveLayer, activeBasemapId, setActiveBasemapId }) => {
+  const handleBasemapChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    setActiveBasemapId(event.target.value);
+  };
+
   return (
     <div className="leaflet-top leaflet-left">
       <div className="map-controls-container">
@@ -26,6 +33,17 @@ export const MapControls: FC<MapControlsProps> = ({ activeLayer, setActiveLayer 
           >
             Heatmap
           </button>
+        </div>
+
+        <div className="leaflet-control leaflet-bar basemap-switcher">
+          <label htmlFor="basemap-select">Basemap</label>
+          <select id="basemap-select" value={activeBasemapId} onChange={handleBasemapChange}>
+            {basemaps.map(basemap => (
+              <option key={basemap.id} value={basemap.id}>
+                {basemap.name}
+              </option>
+            ))}
+          </select>
         </div>
         
         {activeLayer === 'lines' && (

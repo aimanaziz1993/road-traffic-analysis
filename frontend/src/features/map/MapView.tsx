@@ -7,6 +7,7 @@ import { MapAnimator } from './MapAnimator';
 import { ZoomToFeature } from './ZoomToFeature';
 import { HeatmapLayer } from './HeatmapLayer';
 import { MapControls } from './MapControls';
+import { basemaps } from './map.config';
 import '../../styles/MapView.css';
 
 // const getColor = (trafficIndex: number) => {
@@ -30,15 +31,16 @@ interface MapViewProps {
 export const MapView: FC<MapViewProps> = ({ results, selectedRoad }) => {
   const [activeLayer, setActiveLayer] = useState<MapLayer>('lines');
   const selangorCenter: [number, number] = [3.0738, 101.5183];
-
   const heatmapPoints: [number, number, number][] = results ? results.flatMap(road => road.heatmapPoints) ?? [] : [];
+  const [activeBasemapId, setActiveBasemapId] = useState<string>(basemaps[0].id);
+  const activeBasemap = basemaps.find(b => b.id === activeBasemapId) || basemaps[0];
 
   return (
     <MapContainer center={selangorCenter} zoom={10} style={{ height: '100%', width: '100%' }} zoomControl={false}>
       <TileLayer
-        // Using a dark theme tile layer
-        url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+        key={activeBasemap.id}
+        url={activeBasemap.url}
+        attribution={activeBasemap.attribution}
       />
 
       {/* Conditional Rendering of Layers */}
@@ -69,7 +71,10 @@ export const MapView: FC<MapViewProps> = ({ results, selectedRoad }) => {
 
       <MapAnimator results={results} />
       <ZoomToFeature feature={selectedRoad} />
-      <MapControls activeLayer={activeLayer} setActiveLayer={setActiveLayer} />
+      <MapControls activeLayer={activeLayer} 
+        setActiveLayer={setActiveLayer} 
+        activeBasemapId={activeBasemapId}
+        setActiveBasemapId={setActiveBasemapId} />
       {/* <LayerControl activeLayer={activeLayer} setActiveLayer={setActiveLayer} /> */}
     </MapContainer>
   );
