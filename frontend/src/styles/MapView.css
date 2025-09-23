@@ -42,3 +42,59 @@
   color: var(--accent-primary);
   font-weight: 700;
 }
+
+/* Custom Tooltip Styling */
+.custom-tooltip {
+  background: var(--panel-background) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--text-primary) !important;
+  border: 1px solid var(--panel-border) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4) !important;
+  padding: 10px 15px !important;
+  font-family: var(--font-family);
+  font-size: 14px;
+}
+
+.custom-tooltip h4 {
+  margin: 0 0 8px 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.custom-tooltip p {
+  margin: 0 0 10px 0;
+  max-width: 250px;
+  white-space: normal;
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.custom-tooltip .score-line {
+  font-size: 13px;
+  font-weight: 500;
+  border-top: 1px solid var(--panel-border);
+  padding-top: 8px;
+}
+
+.custom-tooltip .score-line strong {
+  color: var(--accent-primary);
+  font-weight: 700;
+}
+
+/* Override the tooltip arrow to match our theme */
+.custom-tooltip.leaflet-tooltip-top::before {
+  border-top-color: var(--panel-background) !important;
+}
+.custom-tooltip.leaflet-tooltip-bottom::before {
+  border-bottom-color: var(--panel-background) !important;
+}
+.custom-tooltip.leaflet-tooltip-left::before {
+  border-left-color: var(--panel-background) !important;
+}
+.custom-tooltip.leaflet-tooltip-right::before {
+  border-right-color: var(--panel-background) !important;
+}

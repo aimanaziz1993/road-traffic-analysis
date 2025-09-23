@@ -16,13 +16,17 @@ function App() {
   const [runAnalysis, { data: results, isLoading, error }] = useRunAnalysisMutation();
   const [isPanelOpen, setIsPanelOpen] = useState(true);
   const [selectedRoad, setSelectedRoad] = useState<RoadCandidate | null>(null);
+  const [activeFilters, setActiveFilters] = useState<AnalysisRequest>({});
 
   useEffect(() => {
+    const initialFilters = {};
+    setActiveFilters(initialFilters);
     runAnalysis({});
   }, [runAnalysis])
 
   const handleAnalysis = (filters: AnalysisRequest) => {
     setSelectedRoad(null); 
+    setActiveFilters(filters);
     runAnalysis(filters);
   };
 
@@ -44,6 +48,7 @@ function App() {
               isLoading={isLoading} 
               error={error} 
               onRoadSelect={setSelectedRoad}
+              filters={activeFilters}
             />
           </div>
           <button className="panel-toggle-button" onClick={() => setIsPanelOpen(!isPanelOpen)} title="Toggle Panel">

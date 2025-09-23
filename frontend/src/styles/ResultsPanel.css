@@ -1,124 +1,108 @@
 .results-panel {
-  flex-grow: 1; /* Take remaining space */
-  overflow: hidden; /* Prevent inner scrollbar */
+  flex-grow: 1;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
 }
 
-.results-panel h3 {
-  text-align: center;
-  margin-top: 0;
-  margin-bottom: 20px;
+.results-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
+  margin: 0 0 15px 0;
+  border-bottom: 1px solid var(--panel-border);
+}
+
+.results-header h3 {
+  margin: 0;
   font-weight: 600;
-  color: var(--text-secondary);
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.filters-display {
+  display: flex;
+  gap: 6px;
+  flex-wrap: nowrap;
+  align-items: center;
+  /* overflow: hidden; */
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.filter-pill {
+  background-color: rgba(0, 198, 255, 0.15);
+  color: var(--accent-primary);
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  text-transform: capitalize;
 }
 
 .results-list {
   list-style: none;
   padding: 0;
   margin: 0;
-  overflow-y: auto; /* Enable scroll on the list only */
-  padding-right: 10px; /* Space for scrollbar */
+  overflow-y: auto;
 }
-
-/* Custom scrollbar for the list */
 .results-list::-webkit-scrollbar { width: 6px; }
 .results-list::-webkit-scrollbar-thumb { background: var(--accent-primary); border-radius: 3px; }
 .results-list::-webkit-scrollbar-track { background: transparent; }
 
-.result-item {
-  background-color: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--panel-border);
-  border-radius: 12px;
-  padding: 15px;
-  margin-bottom: 15px;
-  text-align: left;
+.result-item.compact {
   display: flex;
-  gap: 15px;
-  transition: all 0.2s ease-in-out;
-  cursor: pointer;
-}
-
-.result-item:hover {
-  transform: scale(1.02);
-  border-color: var(--accent-primary);
-}
-
-.rank {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--accent-primary);
-  align-self: center;
-}
-
-.details {
-  flex-grow: 1;
-}
-
-.road-name {
-  font-weight: 600;
-  font-size: 1.1rem;
-}
-
-.reason {
-  color: var(--text-secondary);
-  font-size: 0.9rem;
-  margin: 5px 0 12px 0;
-  line-height: 1.5;
-}
-
-.stats-container {
-  display: flex;
-  gap: 15px;
-  font-size: 0.85rem;
   align-items: center;
+  gap: 15px;
+  padding: 12px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
 }
 
-.stat {
-  background-color: rgba(0,0,0,0.2);
-  padding: 4px 10px;
-  border-radius: 6px;
-  color: var(--text-secondary);
+.result-item.compact:hover {
+  background-color: rgba(255, 255, 255, 0.08);
 }
 
-.stat strong {
-  color: var(--text-primary);
-  font-weight: 600;
-}
-
-.traffic-index-stat::before {
-  content: '';
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  margin-right: 8px;
-  background-color: hsl(calc((1 - var(--traffic-value, 0)) * 120), 100%, 50%);
-}
-
-.score-container {
-  margin-top: 12px;
-}
-.score-label {
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-  margin-bottom: 4px;
-}
-.score-value {
-  font-size: 1.4rem;
+.result-item.compact .rank {
+  font-size: 1.1rem;
   font-weight: 700;
-  color: var(--accent-primary);
-  margin-bottom: 8px;
+  color: var(--text-secondary);
+  flex-shrink: 0;
 }
-.score-bar-background {
-  height: 6px;
-  width: 100%;
-  background-color: rgba(0,0,0,0.3);
-  border-radius: 3px;
+
+.compact-details {
+  flex-grow: 1;
   overflow: hidden;
 }
-.score-bar-foreground {
+
+.compact-details .road-name {
+  font-weight: 500;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 8px;
+}
+
+.compact-details .score-bar-background {
+  height: 5px;
+  width: 100%;
+  background-color: rgba(0,0,0,0.3);
+  border-radius: 2.5px;
+}
+
+.compact-details .score-bar-foreground {
   height: 100%;
   background: linear-gradient(90deg, var(--accent-secondary), var(--accent-primary));
-  border-radius: 3px;
+  border-radius: 2.5px;
+}
+
+.result-item.compact .score-value {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--accent-primary);
+  flex-shrink: 0;
 }

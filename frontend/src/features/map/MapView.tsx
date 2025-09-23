@@ -1,11 +1,12 @@
 import{ type FC, useState } from 'react';
-import { MapContainer, TileLayer, Polyline, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Polyline, Tooltip } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import type { RoadCandidate } from '../../types';
 import { MapAnimator } from './MapAnimator';
-import { LayerControl, type MapLayer } from './LayerControl';
+// import { LayerControl, type MapLayer } from './LayerControl';
 import { ZoomToFeature } from './ZoomToFeature';
 import { HeatmapLayer } from './HeatmapLayer';
+import { MapControls } from './MapControls';
 import '../../styles/MapView.css';
 
 // const getColor = (trafficIndex: number) => {
@@ -18,6 +19,8 @@ const getColor = (score: number) => {
     const hue = score * 120;
     return `hsl(${hue}, 100%, 50%)`;
 };
+
+export type MapLayer = 'lines' | 'heatmap';
 
 interface MapViewProps {
   results?: RoadCandidate[];
@@ -47,16 +50,15 @@ export const MapView: FC<MapViewProps> = ({ results, selectedRoad }) => {
           <Polyline
             key={road.id}
             positions={positions}
-            pathOptions={{ color: getColor(road.locationPotentialScore), weight: 5, opacity: 0.8 }}
-          >
-            <Popup>
-              <div className="custom-popup">
-                <h4>{road.roadName}</h4>
-                <p>{road.city}, {road.roadType}</p>
-                <span>Traffic Index: <strong>{road.trafficIndex}</strong></span>
-                <span>Potential Score: <strong>{road.locationPotentialScore.toFixed(2)}</strong></span>
-              </div>
-            </Popup>
+            pathOptions={{ color: getColor(road.locationPotentialScore), weight: 5, opacity: 0.8 }}>
+            <Tooltip direction="top" offset={[0, -5]} opacity={1} permanent={false} className="custom-tooltip">
+                <h4>{road.roadName} - {road.city}</h4>
+                <p>{road.reason}</p>
+                <div className="score-line">
+                  Potential Score: <strong>{road.locationPotentialScore.toFixed(2)}</strong>, &nbsp;
+                  Traffic Index: <strong>{road.trafficIndex}</strong>
+                </div>
+            </Tooltip>
           </Polyline>
         );
       })}
@@ -67,7 +69,8 @@ export const MapView: FC<MapViewProps> = ({ results, selectedRoad }) => {
 
       <MapAnimator results={results} />
       <ZoomToFeature feature={selectedRoad} />
-      <LayerControl activeLayer={activeLayer} setActiveLayer={setActiveLayer} />
+      <MapControls activeLayer={activeLayer} setActiveLayer={setActiveLayer} />
+      {/* <LayerControl activeLayer={activeLayer} setActiveLayer={setActiveLayer} /> */}
     </MapContainer>
   );
 };

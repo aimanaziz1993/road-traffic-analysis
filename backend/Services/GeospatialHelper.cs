@@ -7,7 +7,7 @@ public static class GeospatialHelper
     public static List<Coordinate> InterpolatePointsAlongLine(Geometry geometry, double intervalMeters)
     {
         var points = new List<Coordinate>();
-        var line = geometry as LineString; // Cast the geometry to a LineString
+        var line = geometry as LineString;
 
         if (line == null || line.Length == 0)
         {
@@ -16,7 +16,6 @@ public static class GeospatialHelper
 
         points.Add(line.StartPoint.Coordinate);
 
-        // This approximate conversion logic remains the same
         const double metersPerDegree = 111139;
         double intervalDegrees = intervalMeters / metersPerDegree;
         double currentDistance = intervalDegrees;
